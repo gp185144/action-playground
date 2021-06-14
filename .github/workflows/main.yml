@@ -37,7 +37,7 @@ jobs:
         uses: litmuschaos/github-chaos-actions@v0.3.1
         env:
           ##Pass kubeconfig data from secret in base 64 encoded form 
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          KUBE_CONFIG_DATA: ${{ env.KUBE_CONFIG_DATA }}
           ##Give application info under chaos
           APP_NS: default
           APP_LABEL: run=nginx
