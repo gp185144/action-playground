@@ -12,13 +12,23 @@ jobs:
       - name: Creating kind cluster 
         uses: helm/kind-action@v1.0.0-rc.1
 
-      - name: Deploy an application
+      - name: Get config
+        run: |
+          cat $HOME/.kube/config | base64
+
+      - name: Deploy application
         run: |
           kubectl apply -f https://k8s.io/examples/application/deployment.yaml
 
-      - name : Get config
+      - name: Install litmus
         run: |
-          cat $HOME/.kube/config | base64
+          kubectl create ns litmus
+          kubectl apply -f https://litmuschaos.github.io/litmus/2.0.0-Beta/litmus-2.0.0-Beta.yaml
+
+      - name: Verify litmus
+        run: |
+          kubectl get pods
+          kubectl get pods -n litmus
 
       - name: Running Litmus pod delete chaos experiment
         uses: litmuschaos/github-chaos-actions@v0.3.1
