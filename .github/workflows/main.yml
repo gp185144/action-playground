@@ -9,21 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Creating kind cluster 
-        uses: helm/kind-action@v1.0.0-rc.1
-
-      - name: Get config
-        run: |
-          cat $HOME/.kube/config | base64
+      - name: Installing Prerequisites (KinD Cluster)
+        uses: engineerd/setup-kind@v0.5.0
+        with:
+            version: "v0.7.0"
 
       - name: Deploy application
         run: |
           kubectl apply -f https://k8s.io/examples/application/deployment.yaml
 
-      - name: Install litmus
-        run: |
-          kubectl create ns litmus
-          kubectl apply -f https://litmuschaos.github.io/litmus/2.0.0-Beta/litmus-2.0.0-Beta.yaml
+      - name: Setting up kubeconfig ENV for Github Chaos Action
+        run: echo ::set-env name=KUBE_CONFIG_DATA::$(base64 -w 0 ~/.kube/config)
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+      - name: Setup Litmus
+        uses: litmuschaos/github-chaos-actions@v0.3.1
+        env:
+          INSTALL_LITMUS: true  
 
       - name: Verify litmus
         run: |
@@ -35,8 +38,6 @@ jobs:
         env:
           ##Pass kubeconfig data from secret in base 64 encoded form 
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          ##If litmus is not installed
-          INSTALL_LITMUS: true
           ##Give application info under chaos
           APP_NS: default
           APP_LABEL: run=nginx
