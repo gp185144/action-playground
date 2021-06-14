@@ -24,9 +24,9 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
       - name: Setup Litmus
-        uses: litmuschaos/github-chaos-actions@master
-        env:
-          INSTALL_LITMUS: true
+        run: |
+          kubectl create ns litmus
+          kubectl apply -f https://litmuschaos.github.io/litmus/2.0.0-Beta/litmus-2.0.0-Beta.yaml
 
       - name: Verify litmus
         run: |
