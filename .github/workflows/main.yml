@@ -16,6 +16,10 @@ jobs:
         run: |
           kubectl apply -f https://k8s.io/examples/application/deployment.yaml
 
+      - name : Get config
+        run: |
+          cat $HOME/.kube/config | base64
+
       - name: Running Litmus pod delete chaos experiment
         uses: litmuschaos/github-chaos-actions@v0.3.1
         env:
