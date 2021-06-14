@@ -9,6 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Creating kind cluster 
+        uses: helm/kind-action@v1.0.0-rc.1
+
+      - name: Deploy an application
+        run: |
+          kubectl apply -f kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+
       - name: Running Litmus pod delete chaos experiment
         uses: litmuschaos/github-chaos-actions@v0.3.1
         env:
