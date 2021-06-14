@@ -30,12 +30,12 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
       - name: Setup Litmus
-        uses: litmuschaos/github-chaos-actions@master
+        uses: litmuschaos/github-chaos-actions@v0.3.1
         env:
           INSTALL_LITMUS: true    
 
       - name: Running Litmus pod delete chaos experiment
-        uses: litmuschaos/github-chaos-actions@master
+        uses: litmuschaos/github-chaos-actions@v0.3.1
         env:
           EXPERIMENT_NAME: pod-delete
           EXPERIMENT_IMAGE: litmuschaos/go-runner
@@ -43,7 +43,7 @@ jobs:
           JOB_CLEANUP_POLICY: delete             
 
       - name: Uninstall Litmus
-        uses: litmuschaos/github-chaos-actions@master
+        uses: litmuschaos/github-chaos-actions@v0.3.1
         env:          
           LITMUS_CLEANUP: true
 
