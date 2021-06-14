@@ -24,9 +24,9 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
       - name: Setup Litmus
-        uses: litmuschaos/github-chaos-actions@v0.3.1
+        uses: litmuschaos/github-chaos-actions@master
         env:
-          INSTALL_LITMUS: true  
+          INSTALL_LITMUS: true
 
       - name: Verify litmus
         run: |
