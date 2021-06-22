@@ -1,1 +1,1 @@
-# litmus-action
+# action-playground
