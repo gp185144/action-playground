@@ -13,9 +13,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: 'main'
+          token: ${{ secrets.ACTION_TOKEN }}
         
       - name: Save test.txt
-        run: echo test > test.txt
+        run: echo test2 > test.txt
         
       - name: Commit and push
         run: |
