@@ -15,11 +15,16 @@ jobs:
           
       - name: Fail
         id: fail
-        continue-on-error: true
         run: |
           throw "This is an exception message."
           
       - name: Succ
+        if: ${{ always() }}
+        run: |
+          echo ${{ steps.fail.conclusion }}
+          
+      - name: Succ2
+        if: ${{ always() }}
         run: |
           echo ${{ steps.fail.conclusion }}
           
