@@ -22,12 +22,12 @@ jobs:
         id: succ
         if: ${{ always() }}
         run: |
-          echo ${{ steps.fail.conclusion }}
+          echo ${{ job.status }}
           
       - name: Succ2
         if: ${{ always() }}
         run: |
-          echo ${{ steps.succ.conclusion }}
+          echo ${{ job.status }}
           
 #       - name: Result
 #         run: |
