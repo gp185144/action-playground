@@ -15,7 +15,7 @@ jobs:
           
       - name: Succ
         run: |
-          echo ${{ conclusion }}
+          echo ${{ steps.conclusion }}
           
 #       - name: Result
 #         run: |
