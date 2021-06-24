@@ -12,13 +12,13 @@ jobs:
       - name: Test1
         id: test1
         run: |
-          echo lol
+          throw "This is an exception message."
           
       - name: Test2
         id: test2
         if: ${{ always() }}
         run: |
-          throw "This is an exception message."
+          echo lol
                     
       - name: Result
         run: |
