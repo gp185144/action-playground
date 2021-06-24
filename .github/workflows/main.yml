@@ -22,8 +22,8 @@ jobs:
                     
       - name: Result
         run: |
-          echo [
-          echo "test1: ${{ steps.test1.conclusion }}," >> tests-status.json
-          echo "test2: ${{ steps.test2.conclusion }}," >> tests-status.json
-          echo ]
+          echo [ >> tests-status.json
+          echo "test1: ${{ steps.test1.outcome }}," >> tests-status.json
+          echo "test2: ${{ steps.test2.outcome }}," >> tests-status.json
+          echo ] >> tests-status.json
           cat tests-status.json
