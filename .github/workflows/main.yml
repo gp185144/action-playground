@@ -24,7 +24,7 @@ jobs:
         run: |
           echo [ >> tests-list.json
   
-          for i in test1 test2
+          for i in ${{ steps.$i.outcome }} test2
           do
             echo "${i}," >> tests-status.json
           done
