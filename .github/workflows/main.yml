@@ -19,6 +19,7 @@ jobs:
           throw "This is an exception message."
           
       - name: Succ
+        id: succ
         if: ${{ always() }}
         run: |
           echo ${{ steps.fail.conclusion }}
@@ -26,7 +27,7 @@ jobs:
       - name: Succ2
         if: ${{ always() }}
         run: |
-          echo ${{ steps.fail.conclusion }}
+          echo ${{ steps.succ.conclusion }}
           
 #       - name: Result
 #         run: |
