@@ -8,10 +8,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     
+    env:
+      PATH_TEST_LOG: tests-log.json
+    
     steps:
       - name: Test start timestamp
         run: |
-          echo "[ $(date +%s) ," >> tests-log.json
+          echo "[ $(date +%s) ," >> ${{ env.PATH_TEST_LOG }}
           
       - name: Test1
         id: test1
@@ -20,7 +23,7 @@ jobs:
           throw "This is an exception message."      
       - name: Test log
         run: |
-          echo "{ \"name\": ${NAME}, \"status\": ${STATUS}, \"end\": $(date +%s) }," >> tests-log.json
+          echo "{ \"name\": ${NAME}, \"status\": ${STATUS}, \"end\": $(date +%s) }," >> ${{ env.PATH_TEST_LOG }}
         env:
           NAME: Test 1
           STATUS: ${{ steps.test1.outcome }}
@@ -31,14 +34,14 @@ jobs:
           echo lol
       - name: Test log
         run: |
-          echo "{ \"name\": ${NAME}, \"status\": ${STATUS}, \"end\": $(date +%s) }," >> tests-log.json
+          echo "{ \"name\": ${NAME}, \"status\": ${STATUS}, \"end\": $(date +%s) }," >> ${{ env.PATH_TEST_LOG }}
         env:
           NAME: Test 2
           STATUS: ${{ steps.test2.outcome }}
           
       - name: Test end timestamp
         run: |
-          echo "$(date +%s) ]" >> tests-log.json
+          echo "$(date +%s) ]" >> ${{ env.PATH_TEST_LOG }}
                     
       - name: Result
         run: |          
