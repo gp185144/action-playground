@@ -46,3 +46,4 @@ jobs:
       - name: Result
         run: |          
           cat ${{ env.PATH_TEST_LOG }}
+          echo ${{ github.actor }}
