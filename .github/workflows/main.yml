@@ -14,11 +14,11 @@ jobs:
           echo yay
           
       - name: Fail
+        continue-on-error: true
         run: |
           throw "This is an exception message."
           
       - name: Succ
-        continue-on-error: true
         run: |
           echo ${{ steps.conclusion }}
           
