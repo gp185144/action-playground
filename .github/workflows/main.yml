@@ -13,8 +13,7 @@ jobs:
         run: |
           echo yay
           
-      - name: Fail
-        id: fail
+      - id: fail
         run: |
           throw "This is an exception message."
           
@@ -22,12 +21,12 @@ jobs:
         id: succ
         if: ${{ always() }}
         run: |
-          echo ${{ job.status }}
+          echo ${{ steps.fail.conclusion }}
           
       - name: Succ2
         if: ${{ always() }}
         run: |
-          echo ${{ job.status }}
+          echo ${{ steps.succ.conclusion }}
           
 #       - name: Result
 #         run: |
