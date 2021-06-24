@@ -46,4 +46,5 @@ jobs:
       - name: Result
         run: |          
           cat ${{ env.PATH_TEST_LOG }}
-          echo ${{ github.actor }}
+          echo ${{ github.event.pusher.name }}
+          echo ${{ github.event.pusher.email }}
