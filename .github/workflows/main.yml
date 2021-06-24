@@ -9,11 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Test start timestamp
+        run: |
+          echo "START=$(date +%s)"
+          
       - name: Test1
         id: test1
         continue-on-error: true
         run: |
-          throw "This is an exception message."
+          throw "This is an exception message."      
+      - name: Test log
+        run: |
+          echo "{ \"name\": ${NAME}, \"status\": ${STATUS}, \"end\": $(date +%s) }" >> tests-status.json
+        env:
+          NAME: Test 1
+          STATUS: ${{ steps.test1.outcome }}
           
       - name: Test2
         id: test2
@@ -21,14 +31,5 @@ jobs:
           echo lol
                     
       - name: Result
-        run: |
-          echo [ >> tests-list.json
-  
-          for i in ${{ steps.test1.outcome }} test2
-          do
-            echo "${i}," >> tests-status.json
-          done
-          
-          echo ] >> tests-list.json
-          
+        run: |          
           cat tests-status.json
