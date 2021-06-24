@@ -16,8 +16,8 @@ jobs:
       - name: Succ
         if: ${{ success() }}
         run: |
-          echo yay
+          echo ${{ success() }}
           
-      - name: Result
-        run: |
-          cat tests-status.json
+#       - name: Result
+#         run: |
+#           cat tests-status.json
