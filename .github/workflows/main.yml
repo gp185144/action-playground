@@ -11,12 +11,12 @@ jobs:
     steps:
       - name: Test1
         id: test1
+        continue-on-error: true
         run: |
           throw "This is an exception message."
           
       - name: Test2
         id: test2
-        if: ${{ always() }}
         run: |
           echo lol
                     
