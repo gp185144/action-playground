@@ -9,25 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: First step
+      - name: Test1
+        id: test1
         run: |
-          echo yay
+          echo lol
           
-      - id: fail
+      - name: Test2
+        id: test2
+        if: ${{ always() }}
         run: |
           throw "This is an exception message."
-          
-      - name: Succ
-        id: succ
-        if: ${{ always() }}
+                    
+      - name: Result
         run: |
-          echo ${{ steps.fail.conclusion }}
-          
-      - name: Succ2
-        if: ${{ always() }}
-        run: |
-          echo ${{ steps.succ.conclusion }}
-          
-#       - name: Result
-#         run: |
-#           cat tests-status.json
+          echo [
+          echo "test1: ${{ steps.test1.conclusion }}," >> tests-status.json
+          echo "test2: ${{ steps.test2.conclusion }}," >> tests-status.json
+          echo ]
+          cat tests-status.json
