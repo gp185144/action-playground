@@ -45,4 +45,4 @@ jobs:
                     
       - name: Result
         run: |          
-          cat tests-status.json
+          cat ${{ env.PATH_TEST_LOG }}
