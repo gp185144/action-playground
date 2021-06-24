@@ -26,7 +26,8 @@ jobs:
   
           for i in {1..5}
           do
-            echo lol
+            echo "{\"test1\": ${{ steps.test1.outcome }}}," >> tests-status.json
+            echo "{\"test2\": ${{ steps.test2.outcome }}}," >> tests-status.json
           done
           
           echo ] >> tests-status.json
