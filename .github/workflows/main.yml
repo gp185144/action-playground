@@ -9,18 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Fail
-        run: |
-          throw "Test Failed"
-          echo $STATUS >> tests-status.json
-        env:
-          STATUS: ${{ success() }}
+#       - name: Fail
+#         run: |
+#           throw "Test Failed"
+#           echo $STATUS >> tests-status.json
+#         env:
+#           STATUS: ${{ success() }}
+          
       - name: Succ
         if: ${{ always() }}
-        run: |
-          echo $STATUS >> tests-status.json
         env:
           STATUS: ${{ success() }}
+        run: |
+          echo $STATUS >> tests-status.json
+          
       - name: Result
         run: |
           cat tests-status.json
