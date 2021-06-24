@@ -23,7 +23,12 @@ jobs:
       - name: Result
         run: |
           echo [ >> tests-status.json
-          echo "{\"test1\": ${{ steps.test1.outcome }}}," >> tests-status.json
-          echo "{\"test2\": ${{ steps.test2.outcome }}}," >> tests-status.json
+  
+          for i in {1..5}
+          do
+            echo lol
+          done
+          
           echo ] >> tests-status.json
+          
           cat tests-status.json
