@@ -12,11 +12,9 @@ jobs:
       - name: Fail
         run: |
           throw "Test Failed"
-          echo ${{ success() }} >> tests-status.json
+          echo "${{ success() }}" >> tests-status.json
       - name: Succ
         if: ${{ always() }}
-        run: |
-          echo ${{ success() }} >> tests-status.json
       - name: Result
         run: |
           cat tests-status.json
