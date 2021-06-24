@@ -14,9 +14,8 @@ jobs:
           echo yay
           
       - name: Succ
-        if: ${{ success() }}
         run: |
-          echo ${{ success() }}
+          echo ${{ job.status }}
           
 #       - name: Result
 #         run: |
