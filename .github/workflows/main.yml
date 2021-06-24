@@ -14,11 +14,9 @@ jobs:
           echo yay
           
       - name: Succ
-        if: ${{ always() }}
-        env:
-          STATUS: ${{ success() }}
+        if: ${{ success() }}
         run: |
-          echo $STATUS >> tests-status.json
+          echo yay
           
       - name: Result
         run: |
