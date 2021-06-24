@@ -24,10 +24,10 @@ jobs:
         run: |
           echo [ >> tests-status.json
   
-          for i in {1..5}
+          for i in test1 test2
           do
-            echo "{\"test1\": ${{ steps.test1.outcome }}}," >> tests-status.json
-            echo "{\"test2\": ${{ steps.test2.outcome }}}," >> tests-status.json
+            echo "{\"$i\": ${{ steps.test1.outcome }}}," >> tests-status.json
+            echo "{\"$i\": ${{ steps.test2.outcome }}}," >> tests-status.json
           done
           
           echo ] >> tests-status.json
