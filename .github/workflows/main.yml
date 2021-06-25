@@ -9,42 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      PATH_TEST_LOG: tests-log.json
+      PROM_PATH: ./
     
     steps:
-      - name: Test start timestamp
+      - name: Test save
         run: |
-          echo "[ $(date +%s) ," >> ${{ env.PATH_TEST_LOG }}
-          
-      - name: Test1
-        id: test1
-        continue-on-error: true
-        run: |
-          throw "This is an exception message."      
-      - name: Test log
-        run: |
-          echo "{ \"name\": ${NAME}, \"status\": ${STATUS}, \"end\": $(date +%s) }," >> ${{ env.PATH_TEST_LOG }}
+          echo lol > ${{ env.PROM_PATH }}${FILE_NAME}
         env:
-          NAME: Test 1
-          STATUS: ${{ steps.test1.outcome }}
-          
-      - name: Test2
-        id: test2
+          FILE_NAME: test.json
+      
+      - name: Show
         run: |
-          echo lol
-      - name: Test log
-        run: |
-          echo "{ \"name\": ${NAME}, \"status\": ${STATUS}, \"end\": $(date +%s) }," >> ${{ env.PATH_TEST_LOG }}
-        env:
-          NAME: Test 2
-          STATUS: ${{ steps.test2.outcome }}
-          
-      - name: Test end timestamp
-        run: |
-          echo "$(date +%s) ]" >> ${{ env.PATH_TEST_LOG }}
-                    
-      - name: Result
-        run: |          
-          cat ${{ env.PATH_TEST_LOG }}
-          echo ${{ github.event.pusher.name }}
-          echo ${{ github.event.pusher.email }}
+          cat test.json
+
